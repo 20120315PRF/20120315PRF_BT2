@@ -6,30 +6,29 @@ import logging
 class Configuration:
 
     ## Config parameters parsed here
-    _telegramToken = None
-    _listTelegram = None
-    _mode = None
     _gtm = 0
+    _telegramToken = None
+    _listUsers = None
 
     def __init__(self):
         self._telegramToken = ""
-        self._listTelegram = []
-        self._mode = ""
+        self._listUsers = []
         self._gtm = 0
 
-    def getCandidateList(self):
-        delegates = []
-        #process telegrams
-        for telegram in self._listTelegram.keys():
-            for delegate in self._listTelegram[telegram]:
-                if delegate not in delegates:
-                    delegates.append(delegate)
+    def getTelegramToken(self):
+        if self._telegramToken is not None:
+            return self._telegramToken
+        else:
+            return ""
 
-        return delegates
+    # Get the list of users
+    def getListUsers(self):
+        if self._listUsers is not None:
+            return self._listUsers
+        else:
+            return []
 
-    def getMode(self):
-        return self._mode
-
+    # Get GTM offset
     def getGtm(self):
         if not self._gtm is None:
             return self._gtm
@@ -49,14 +48,14 @@ def readConfigFile(filename):
 
     objectJson = json.loads(fileContent)
 
-    configuration = Configuration()
-
     #extract the from file
+    configuration = Configuration()
     configuration._telegramToken = objectJson['telegram']['token']
     objectJson['telegram'].pop('token', None)
-    configuration._listTelegram = objectJson['telegram']
-    # Working mode
-    configuration._mode = objectJson['mode']
+
+    # Process users to notify
+    listUsers = objectJson['telegram']['listUsers']
+    configuration._listUsers = objectJson['telegram']['listUsers']
     # GTM offset
     if 'GTM' in objectJson:
         configuration._gtm = objectJson['GTM']
