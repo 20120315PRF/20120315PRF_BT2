@@ -8,8 +8,8 @@ import logging
 
 from configuration.readConfig import readConfigFile
 from telegram.generate_telegrams import send_telegram_notifications
-from notification_filter import readLastLog
-from notification_filter import writeLastLog
+#from notification_filter import readLastLog
+#from notification_filter import writeLastLog
 from rake import rake_delegate
 
 # Configure log
@@ -34,8 +34,5 @@ currentTime = time.time()
 send_telegram_notifications(configuration.getTelegramToken(), configuration.getListUsers(),
                             currentTime, configuration.getGtm(), delegateStatus,  [])
 
-
 # 4.Write log of history
 #writeLastLog(delegateStatusList, currentTime)
-
-#print(delegateStatusList)
