@@ -30,13 +30,13 @@ def get_name_delegate(result):
     return run_command(command)
 
 ## Execute the rake query
-def executaRakeQuery():
+def executeRakeQuery():
     result = run_check_nodes('$HOME/lisk-rake','1')
     delegateStatus = delegate_info.DelegateInfoFactory().generateDelegate(get_name_delegate(result))
     delegateStatus['position'] = get_rank(result)
     delegateStatus['uptime'] = get_productivity(result)
-    delegateStatus['approval'] = 'mocked'
     delegateStatus['status'] = is_forging(result)
+    return delegateStatus
 
 # Mock rake query for testing
 # def executeRakeQueryMock():

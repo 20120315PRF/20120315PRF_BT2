@@ -33,15 +33,11 @@ def __sendTelegramMessage(apiKey, user, msg):
 
 # Generate email message for a given delegate
 def __generateMessageForTelegram( delegate, user, currentTime, history):
-
-    msg = ""
-
     ## Delegate status
     if delegate['status'] is None:
         delegate['status'] = 'Not found'
-    msg = "\n\nDelegate " + delegate['name'] + ": Status=" + delegate['status'] + "\n\t"
-    msg = msg + "Position: " + delegate['position'] + "\tUptime: " + delegate['uptime'] + "\t" + "Approval: " + delegate['approval']
-
+    msg = "\nDelegate " + delegate['name'] + "\n Forging?=" + delegate['status'] + "\n\t"
+    msg = msg + "Position: " + delegate['position'] + "\tUptime: " + delegate['uptime']
     return msg
 
 
@@ -49,6 +45,7 @@ def __generateMessageForTelegram( delegate, user, currentTime, history):
 def generateUtcTime():
     now = datetime.utcnow()
     return str(now).split('.')[0]
+
 ## Generates GTM time with offset
 def generateGtmTime(offset):
     now = datetime.utcnow() + timedelta(hours=offset)
@@ -60,7 +57,6 @@ def send_telegram_notifications (apiKey, userList, currentTime, gtmOffset, deleg
     for user in userList:
         #Cast to str
         userDir = str(user)
-
         msg = __generateMessageForTelegram( delegateStatus , userDir, currentTime, history)
 
         ### Send notification only if msgContent is available
