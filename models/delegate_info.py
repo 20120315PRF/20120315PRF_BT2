@@ -1,7 +1,7 @@
 ## Creates a delegate info object factory
 class DelegateInfoFactory:
 
-    def generateDelegate (self, name):
+    def generate_delegate (self, name):
         delegate = {}
         delegate['name'] = name
         delegate['position'] = '--'

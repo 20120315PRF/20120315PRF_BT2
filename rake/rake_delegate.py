@@ -30,20 +30,20 @@ def get_name_delegate(result):
     return run_command(command)
 
 ## Execute the rake query
-def executeRakeQuery():
+def execute_rake_query():
     result = run_check_nodes('$HOME/lisk-rake','1')
-    delegateStatus = delegate_info.DelegateInfoFactory().generateDelegate(get_name_delegate(result))
-    delegateStatus['position'] = get_rank(result)
-    delegateStatus['uptime'] = get_productivity(result)
-    delegateStatus['status'] = is_forging(result)
-    return delegateStatus
+    delegate_status = delegate_info.DelegateInfoFactory().generate_delegate(get_name_delegate(result))
+    delegate_status['position'] = get_rank(result)
+    delegate_status['uptime'] = get_productivity(result)
+    delegate_status['status'] = is_forging(result)
+    return delegate_status
 
 # Mock rake query for testing
-# def executeRakeQueryMock():
-#     delegateStatusMock = delegate_info.DelegateInfoFactory().generateDelegate("theredhawk")
-#     delegateStatusMock['position'] = '23'
-#     delegateStatusMock['uptime'] = '99'
-#     delegateStatusMock['approval'] = '4.3'
-#     delegateStatusMock['status'] = delegate_info.DelegateInfoStatus.STATUS_CYCLE_LOST
-#     return delegateStatusMock
+def execute_rake_query_mock():
+    delegateStatusMock = delegate_info.DelegateInfoFactory().generate_delegate("theredhawk")
+    delegateStatusMock['position'] = '23'
+    delegateStatusMock['uptime'] = '99'
+    delegateStatusMock['approval'] = '4.3'
+    delegateStatusMock['status'] = delegate_info.DelegateInfoStatus.STATUS_CYCLE_LOST
+    return delegateStatusMock
 

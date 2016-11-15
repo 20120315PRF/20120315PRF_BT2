@@ -10,7 +10,7 @@ DELEGATE_STATUS_LOG_FILE = "delegateinfo.log"
 TIME_TELEGRAM_NOTIFICATION = (1000*60)*60
 
 ## Return the last config file stored
-def readLastLog():
+def read_last_log():
     if os.path.exists(DELEGATE_STATUS_LOG_FILE):
         logFile = open(DELEGATE_STATUS_LOG_FILE, 'r')
         fileContent = logFile.read()
@@ -21,7 +21,7 @@ def readLastLog():
         return None
 
 ## Write the file
-def writeLastLog(delegateList, currentTime):
+def write_last_log(delegateList, currentTime):
     logFileJson = {}
     logFileJson['lastTime'] = currentTime
 
